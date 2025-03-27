@@ -1,15 +1,15 @@
 
 import { createNativeStackNavigator,NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { View, StyleSheet,Button } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import PlanetsScreen from '../screens/planetsScreen';
 import { useNavigation } from '@react-navigation/native';
-
 import React from 'react';
+ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { RootStackParamList } from '../types/screensTypes';
 
 import FilmScreen from '../screens/filmScreen';
-
+import CharacteresScreen from '../screens/characteresScreen';
 
 const Stack = createNativeStackNavigator();
 const StaticScreen : React.FC = () => {
@@ -21,20 +21,34 @@ const StaticScreen : React.FC = () => {
 
             <View style={styles.tree}>
 
-                <Stack.Navigator initialRouteName='FilmScreen'>
+                <Stack.Navigator initialRouteName="FilmScreen">
                         <Stack.Screen name="FilmScreen" component={FilmScreen} />
                         <Stack.Screen name="PlanetsScreen" component={PlanetsScreen} />
+                        <Stack.Screen name="CharacteresScreen" component={CharacteresScreen}/>
                 </Stack.Navigator>
             </View>
             <View style={styles.footer}>
-                <View >
-                    <Button
-                        title="Film Screen"
-                        onPress={() => navigation.navigate('FilmScreen')}
+                <View style={styles.buttonContainer}>
+                    <Icon.Button
+                    name="globe"
+                    size={30}
+                    color={'white'}
+                    backgroundColor={'transparent'}
+                    onPress={() => navigation.navigate('PlanetsScreen')}
                     />
-                    <Button
-                        title="Planets Screen"
-                        onPress={() => navigation.navigate('PlanetsScreen')}
+                    <Icon.Button
+                    name="film"
+                    size={30}
+                    color={'white'}
+                    backgroundColor={'transparent'}
+                    onPress={() => navigation.navigate('FilmScreen')}
+                    />
+                    <Icon.Button
+                    name="users"
+                    size={30}
+                    color={'white'}
+                    backgroundColor={'transparent'}
+                    onPress={()=> navigation.navigate('CharacteresScreen')}
                     />
                 </View>
             </View>
@@ -56,7 +70,7 @@ const styles = StyleSheet.create({
       height:700,
     },
     tree : {
-   
+
       flex:3,
       backgroundColor:'blue',
       padding:10,
@@ -64,7 +78,15 @@ const styles = StyleSheet.create({
     },
     footer:{
       flex:0.5,
+      flexDirection:'column',
      backgroundColor:'green',
+     alignContent :'center',
+     justifyContent:'center',
+    },
+    buttonContainer:{
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
     },
   });
 export default StaticScreen;

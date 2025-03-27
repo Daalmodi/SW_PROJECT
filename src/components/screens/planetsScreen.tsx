@@ -1,7 +1,7 @@
 import { Text, View } from 'react-native';
 
 const PlanetsScreen = () =>{
-    return( 
+    return(
         <View>
             <Text> Planets Screen</Text>
         </View>
