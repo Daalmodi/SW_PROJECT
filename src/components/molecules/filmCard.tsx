@@ -1,22 +1,24 @@
 import React from 'react';
 import { View,Text, ScrollView } from 'react-native';
-import { fetchFilmById } from '../services/swapiService';
+
 import { Film } from '../types/apiTypes';
 import { lightTheme } from '../themes/themes';
+import { FilmCardProps } from '../types/screensTypes';
+import { fetchFilmByUrl } from '../services/swapiService';
 
 
-const FilmCard = () =>{
+const FilmCard : React.FC<FilmCardProps> = ({route}) =>{
     const [data, setData] = React.useState<Film[]>([]);
     const [loading, setLoading] = React.useState<boolean>(true);
-
+    const {url} = route.params;
     React.useEffect(() => {
         const getData = async () => {
-          const response = await fetchFilmById('2');
+          const response = await fetchFilmByUrl(url);
           setData([response]);
           setLoading(false);
         };
         getData();
-      }, []);
+      }, [url]);
 
       return (
         <View style={lightTheme.cardContainer}>

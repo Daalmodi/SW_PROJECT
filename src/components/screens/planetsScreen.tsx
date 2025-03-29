@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Text, View } from 'react-native';
-import { fetchAllplanets } from '../services/swapiService';
+import { fetchAllPlanets } from '../services/swapiService';
 import { ScrollView } from 'react-native';
 import { Planet } from '../types/apiTypes';
 import TochableItem from '../atoms/tochableItem';
@@ -10,11 +10,11 @@ import { RootStackParamList } from '../types/screensTypes';
 const PlanetsScreen = () =>{
 const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 const [planets,setplanets] = React.useState<Planet[]>([]);
-const[loading,setLoading] = React.useState(true);
+const[loading,setLoading] = React.useState<boolean>(true);
 
 useEffect(() => {
     const getPlanets = async () => {
-        const response = await fetchAllplanets();
+        const response = await fetchAllPlanets();
         setplanets(response);
         setLoading(false);
     };
