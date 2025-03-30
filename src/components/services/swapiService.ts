@@ -1,4 +1,4 @@
-import { Film, Planet } from "../types/apiTypes";
+import { Character, Film, Planet } from "../types/apiTypes";
 
 const API_URL = 'https://swapi.py4e.com/api';
 
@@ -60,4 +60,28 @@ export const fetchPlanetByUrl = async (url: string) => {
   }
 };
 
+export const fetchAllCharacters = async ()=>{
+  try{
+    const response = await fetch(`${API_URL}/people/`);
+    if(!response.ok)throw new Error(`HTTP error! Status: ${response.status}`);
+    const characteres = await response.json();
+    return characteres.results as Character[];
+  }catch(error){
+    console.error('Error fetching  all characteres');
+    return[];
+  }
+};
+
+
+export const fetchCharacterByUrl = async (url:string)=>{
+  try{
+    const response = await fetch(`${url}`);
+    if(!response.ok) throw new Error(`HTTP error! Status:${response.status}`);
+    const character = await response.json();
+    return{...character};
+  }catch(error){
+    console.error(`Error fetching character with Id ${url}:`,error);
+    return null;
+  }
+};
 

@@ -7,6 +7,7 @@ import SearchScreen from '../screens/searchScreen';
 import PlanetCard from '../molecules/planetCard';
 import { RootStackParamList } from '../types/screensTypes';
 import FilmCard from '../molecules/filmCard';
+import CharacterCard from '../molecules/characterCard';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const ScreensNavigation = () => {
@@ -24,6 +25,7 @@ const ScreensNavigation = () => {
                         <Stack.Screen name="SearchScreen" component={SearchScreen}/>
                         <Stack.Screen name="PlanetCard" component={PlanetCard}/>
                         <Stack.Screen name="FilmCard" component={FilmCard}/>
+                        <Stack.Screen name="CharacterCard" component={CharacterCard}/>
         </Stack.Navigator>
 
     );

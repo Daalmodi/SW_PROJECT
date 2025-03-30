@@ -5,6 +5,7 @@ export type RootStackParamList = {
     PlanetsScreen: undefined;
     PlanetCard: {url:string};
     FilmCard:{url:string};
+    CharacterCard:{url:string};
     CharacteresScreen: undefined;
     SearchScreen: undefined;
   };
@@ -13,5 +14,6 @@ export type RootStackParamList = {
 
   export type PlanetCardProps = NativeStackScreenProps<RootStackParamList, 'PlanetCard'>;
   export type FilmCardProps = NativeStackScreenProps<RootStackParamList,'FilmCard'>;
+  export type CharacterCardProps= NativeStackScreenProps<RootStackParamList,'CharacterCard'>;
 
 
