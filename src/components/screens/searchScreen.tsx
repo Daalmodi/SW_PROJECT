@@ -1,16 +1,21 @@
-import { FlatList, Text, TextInput, View } from 'react-native';
+import { Text, TextInput, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { fetchSearchALL } from '../services/swapiService';
+import TochableItem from '../atoms/tochableItem';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../types/screensTypes';
 
 const SearchScreen = () => {
+    const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
     const [query,setQuery] = useState<string>('');
-    const[results,setResults]= useState<{films : any[];characters:any[];planets:any[]}>({
+    const[results,setResults] = useState<{films : any[];characters:any[];planets:any[]}>({
         films:[],
         characters:[],
         planets:[]});
 
     useEffect(() =>{
-        if (query.length< 3)return;
+        if (query.length < 3) return;
         const fetchData = async () =>{
             const {films,characters,planets} = await fetchSearchALL(query);
             setResults({
@@ -34,27 +39,39 @@ const SearchScreen = () => {
             />
             {/* Mostrar los resultados de las películas */}
             <Text >Películas</Text>
-            <FlatList
-                data={results.films}
-                keyExtractor={(item) => item.title}
-                renderItem={({ item }) => <Text>{item.title}</Text>}
-             />
+                <View>
+                    {results.films.map((film)=>
+                        <TochableItem
+                            key={film.title}
+                            data={film.title ?? 'Unknown'}
+                            onPress={() => navigation.navigate('FilmCard',{url: film.url ?? ''})}
+                        />
+                    )}
+                </View>
 
-      {/* Mostrar los resultados de los personajes */}
+            {/* Mostrar los resultados de los personajes */}
             <Text>Personajes</Text>
-             <FlatList
-                data={results.characters}
-                keyExtractor={(item) => item.name}
-                renderItem={({ item }) => <Text >{item.name}</Text>}
-      />
+                <View>
+                    {results.characters.map((character)=>
+                    <TochableItem
+                        key={character.name}
+                        data={character.name ?? 'Unknown'}
+                        onPress={()=> navigation.navigate('CharacterCard',{url: character.url ?? ''})}
+                    />
+                    )}
+                </View>
 
-      {/* Mostrar los resultados de los planetas */}
+            {/* Mostrar los resultados de los planetas */}
             <Text>Planetas</Text>
-            <FlatList
-                data={results.planets}
-                keyExtractor={(item) => item.name}
-                renderItem={({ item }) => <Text>{item.name}</Text>}
-            />
+                <View>
+                    {results.planets.map((planet)=>
+                        <TochableItem
+                            key={planet.name}
+                            data={planet.name ?? 'Unknown'}
+                            onPress={()=> navigation.navigate('PlanetCard',{url: planet.url ?? ''})}
+                        />
+                    )}
+                </View>
         </View>
     );
 };
