@@ -3,12 +3,15 @@ import { View, StyleSheet } from 'react-native';
 import React from 'react';
 import MenuNav from '../molecules/menuNav';
 import ScreensNavigation from '../navigation/screensNavigation';
+import ThemeButton from '../atoms/themeButton';
 
 
 const StaticScreen : React.FC = () => {
     return(
         <View style={styles.container}>
-            <View style={styles.header}/>
+            <View style={styles.header}>
+                <ThemeButton/>
+            </View>
             <View style={styles.tree}>
               <ScreensNavigation/>
             </View>
