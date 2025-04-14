@@ -38,3 +38,41 @@ export  const lightTheme = StyleSheet.create({
         color: '#666666',
       },
 });
+
+
+export const darkTheme = StyleSheet.create({
+  cardContainer: {
+    backgroundColor: '#2C2C2C',
+    borderRadius: 10,
+    padding: 16,
+    margin: 16,
+    shadowColor: '#000000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 3.84,
+    elevation: 7,
+    borderColor: '#444444',
+    borderWidth: 1,
+    maxHeight: 600,
+    height: 600,
+    width: 350,
+  },
+  title: {
+    fontFamily: 'Open Sans',
+    textAlign: 'center',
+    justifyContent: 'center',
+    fontSize: 25,
+    fontWeight: 'bold',
+    color: '#FFFFFF',
+    marginBottom: 8,
+  },
+  infoContainer: {
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+  },
+  info: {
+    fontFamily: 'Open Sans',
+    fontSize: 17,
+    color: '#CCCCCC',
+  },
+});
