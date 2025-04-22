@@ -1,21 +1,25 @@
 
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 import React from 'react';
 import MenuNav from '../molecules/menuNav';
 import ScreensNavigation from '../navigation/screensNavigation';
 import ThemeButton from '../atoms/themeButton';
-
+import { lightTheme,darkTheme } from '../themes/themes';
+import { useSelector } from 'react-redux';
+import { ThemeState } from '../types/themeTypes';
 
 const StaticScreen : React.FC = () => {
-    return(
-        <View style={styles.container}>
-            <View style={styles.header}>
+const themeState = useSelector((state:{theme:ThemeState})=>state.theme.theme);
+const theme = themeState === 'light' ? lightTheme : darkTheme;
+return(
+        <View style={theme.staticContainer}>
+            <View style={theme.header}>
                 <ThemeButton/>
             </View>
-            <View style={styles.tree}>
+            <View style={theme.tree}>
               <ScreensNavigation/>
             </View>
-            <View style={styles.footer}>
+            <View style={theme.footer}>
                 <MenuNav/>
             </View>
          </View>
@@ -24,31 +28,5 @@ const StaticScreen : React.FC = () => {
 };
 
 
-const styles = StyleSheet.create({
-    container :{
-      flexDirection: 'column',
-      flex:1,
-    },
-    header : {
-      flex:0.5,
-      backgroundColor:'red',
-      width:'100%',
-      height:700,
-    },
-    tree : {
 
-      flex:3,
-      backgroundColor:'blue',
-      padding:10,
-
-    },
-    footer:{
-      flex:0.5,
-      flexDirection:'column',
-     backgroundColor:'black',
-     alignContent :'center',
-     justifyContent:'center',
-    },
-
-  });
 export default StaticScreen;

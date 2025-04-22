@@ -13,7 +13,9 @@ import { RootStackParamList } from '../types/screensTypes';
 
 
 
+
  const FilmScreen = () => {
+         
         const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
         const [films,setFilms] = React.useState<Film[]>([]);
         const [loading,setLoading] = React.useState<boolean>(true);
@@ -38,6 +40,7 @@ import { RootStackParamList } from '../types/screensTypes';
                                                 key={film.title}
                                                 data={film.title ?? 'Unkown'}
                                                 onPress={()=> navigation.navigate('FilmCard',{url: film.url ?? '' })}
+
                                                 />
                                         )}
                                 </View>

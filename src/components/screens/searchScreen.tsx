@@ -5,8 +5,13 @@ import TochableItem from '../atoms/tochableItem';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../types/screensTypes';
+import { useSelector } from 'react-redux';
+import { ThemeState } from '../types/themeTypes';
+import { darkTheme, lightTheme } from '../themes/themes';
 
 const SearchScreen = () => {
+    const themeState = useSelector((state:{theme:ThemeState})=>state.theme.theme);
+    const theme = themeState === 'light' ? lightTheme : darkTheme;
     const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
     const [query,setQuery] = useState<string>('');
     const[results,setResults] = useState<{films : any[];characters:any[];planets:any[]}>({
@@ -35,10 +40,10 @@ const SearchScreen = () => {
                 placeholder="Search"
                 value={query}
                 onChangeText={setQuery}
-                style={{ borderWidth: 1, padding: 10, margin: 10 }}
+                style={theme.input}
             />
             {/* Mostrar los resultados de las películas */}
-            <Text >Películas</Text>
+            <Text style={theme.textField}>Películas</Text>
                 <View>
                     {results.films.map((film)=>
                         <TochableItem
@@ -50,7 +55,7 @@ const SearchScreen = () => {
                 </View>
 
             {/* Mostrar los resultados de los personajes */}
-            <Text>Personajes</Text>
+            <Text style={theme.textField} >Personajes</Text>
                 <View>
                     {results.characters.map((character)=>
                     <TochableItem
@@ -62,7 +67,7 @@ const SearchScreen = () => {
                 </View>
 
             {/* Mostrar los resultados de los planetas */}
-            <Text>Planetas</Text>
+            <Text  style={theme.textField}>Planetas</Text>
                 <View>
                     {results.planets.map((planet)=>
                         <TochableItem

@@ -1,30 +1,21 @@
 import React from 'react';
 import { ListItemProps } from '../types/apiTypes';
 import { TouchableOpacity } from 'react-native';
-import { StyleSheet } from 'react-native';
+
 
 import { Text } from 'react-native';
+import { useSelector } from 'react-redux';
+import { ThemeState } from '../types/themeTypes';
+import { darkTheme, lightTheme } from '../themes/themes';
 const TochableItem: React.FC<ListItemProps> = ({data,onPress})=>{
+  const themeState = useSelector((state:{theme:ThemeState})=>state.theme.theme);
+  const theme = themeState === 'light' ? lightTheme : darkTheme;
     return(
-        <TouchableOpacity style={styles.item} onPress={onPress}>
-            <Text style={styles.itemText}>{data}</Text>
+        <TouchableOpacity style={theme.FilmItem} onPress={onPress}>
+            <Text style={theme.itemText}>{data}</Text>
         </TouchableOpacity>
     );
 
 };
-const styles = StyleSheet.create({
-    item: {
-      backgroundColor: '#333',
-      padding: 15,
-      marginVertical: 10,
-      borderRadius: 10,
-      alignItems: 'center',
-    },
-    itemText: {
-      fontSize: 18,
-      color: '#FFF',
-      fontWeight: 'bold',
-    },
-  });
 
 export default TochableItem;

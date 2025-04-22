@@ -17,6 +17,9 @@ const ScreensNavigation = () => {
                 screenOptions={{
                   headerShown:false,
                   gestureEnabled:false,
+                  contentStyle:{
+                    backgroundColor:'transparent',
+                  }
                 }}
                 >
                         <Stack.Screen name="FilmScreen" component={FilmScreen} />
